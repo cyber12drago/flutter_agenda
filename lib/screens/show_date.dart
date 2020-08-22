@@ -95,11 +95,7 @@ class _ShowDateState extends State<ShowDate> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Worker>>(
-          future: _fetchData(),
-          initialData: <Worker>[],
-          builder: (context, snapshot) {
-            _workers = snapshot.data;
+      body:
             Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -111,10 +107,10 @@ class _ShowDateState extends State<ShowDate> with TickerProviderStateMixin {
                 const SizedBox(height: 8.0),
                 Expanded(child: _buildEventList()),
               ],
-            );
-          }
-        )
-    );
+            )
+
+        );
+
   }
 
 
