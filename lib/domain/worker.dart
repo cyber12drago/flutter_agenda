@@ -11,7 +11,6 @@ class Worker extends Domain {
   String deskripsi;
   String notulensi;
   String alarm;
-
   @override
   Map<String, dynamic> toMap([Purpose purpose = Purpose.created]) {
     var map = <String, dynamic>{

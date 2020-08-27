@@ -43,7 +43,7 @@ class WorkerRepository {
         lokasi LIKE '$pattern' OR
       ''';
     }
-    sql += 'ORDER BY created_at DESC;';
+    sql += 'ORDER BY waktu_mulai ASC;';
     print('[db] raw sql: $sql');
     return modelProvider
         .getDatabase()

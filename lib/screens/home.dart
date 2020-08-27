@@ -1,13 +1,14 @@
+import 'package:agenda/screens/form_login.dart';
 import 'package:agenda/screens/show_date.dart';
 import 'package:flutter/material.dart';
 import 'package:agenda/domain/worker.dart';
 import 'package:agenda/screens/form_worker.dart';
 import 'package:agenda/screens/detail_worker.dart';
 import 'package:agenda/service/app_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Home extends StatefulWidget {
-  @override
   _HomeState createState() => _HomeState();
 }
 
@@ -16,7 +17,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   bool _showTextField = false;
   List<Worker> _workers = [];
   bool _shouldWidgetUpdate = true;
-  int _selectedIndex = 0;
+  int _selectedIndex=1;
+  FormLogin formLogins;
 
 
   void _onItemTapped(int index) {
@@ -51,14 +53,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
           ),
           autofocus: true,
+
           onSubmitted: (value) {
             setState(() {
               _searchCriteria = value;
               _shouldWidgetUpdate = true;
+
             });
           },
         )
-            : Center(child: Text('List Agenda')),
+            : Center(child: Text('Kalender')),
         actions: <Widget>[
           IconButton(
 
@@ -69,6 +73,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   _shouldWidgetUpdate = false;
                 });
               }),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (BuildContext context) => FormLogin(1)));
+            },
+            icon: Icon(Icons.lock_open),
+          ),
 
         ],
       ),
@@ -78,6 +89,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           initialData: <Worker>[],
           builder: (context, snapshot) {
             if (_shouldWidgetUpdate) {
+
               if ((snapshot.connectionState == ConnectionState.none &&
                   snapshot.hasData == null) ||
                   snapshot.connectionState == ConnectionState.waiting) {
@@ -85,8 +97,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 return LinearProgressIndicator();
               } else if (snapshot.hasData && snapshot.data.length == 0) {
                 _workers = snapshot.data;
-                return Container();
+                if(_selectedIndex==1) {
+                  return ShowDate(worker: _workers, workerLength: 0);
+                }
+                else{
+                  return Container();
+                }
               }
+
             }
             //  print('snapshot.data.length ${snapshot.data.length}');
             if (_selectedIndex == 0 || _selectedIndex == 2) {
@@ -119,8 +137,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 },
               );
             }
-            else if (_selectedIndex == 1) {
-              return ShowDate();
+            else if(_selectedIndex==1) {
+                return ShowDate(worker: snapshot.data, workerLength: snapshot.data.length);
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
@@ -131,11 +149,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            title: Text('Business'),
+            title: Text('Kalender'),
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.mail),
-            title: Text('School'),
+            title: Text('Undangan'),
           ),
         ],
         currentIndex: _selectedIndex,

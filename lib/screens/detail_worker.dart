@@ -99,12 +99,12 @@ class _DetailWorkerState extends State<DetailWorker> {
                     ),
                     ListTile(
                       leading: Icon(Icons.access_time),
-                      title: Text(worker.waktuMulai),
+                      title: Text(worker.waktuMulai.substring(0,16)),
                       subtitle: const Text('Waktu Mulai'),
                     ),
                     ListTile(
                       leading: Icon(Icons.access_time),
-                      title: Text(capitalize(worker.waktuSelesai)),
+                      title: Text(capitalize(worker.waktuSelesai.substring(0,16))),
                       subtitle: const Text('Waktu Selesai'),
                     ),
                     ListTile(

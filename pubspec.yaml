@@ -44,13 +44,13 @@ dev_dependencies:
 
 
 flutter_native_splash:
-  image: "assets/images/sekolah.png"
+  image: "assets/images/logo.png"
   color: "#78c0f0"
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/sekolah.png"
+  image_path: "assets/images/logo.png"
 
 
 # For information on the generic Dart part of this file, see the

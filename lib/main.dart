@@ -68,11 +68,11 @@ class _MyAppstate extends State<MyApp> {
       title: 'Sekolahku',
       theme: ThemeData(
         // primarySwatch:
-        primaryColor: const Color(0xff203878),
-        accentColor: const Color(0xfff8c018),
+        primaryColor: const Color(0xff0099ff),
+        accentColor: const Color(0xffff9900),
       ),
       home: databaseIsReady
-          ? FormLogin()
+          ? FormLogin(0)
           : Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

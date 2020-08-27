@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:agenda/domain/worker.dart';
 import 'package:agenda/service/app_service.dart';
@@ -265,7 +266,7 @@ class _FormWorkerState extends State<FormWorker> {
                     focusNode: _lokasiFocus,
                     controller: _lokasiCtrl,
                     decoration: const InputDecoration(
-                      labelText: 'Alamat',
+                      labelText: 'Lokasi',
                     ),
                     onSaved: (String value) {
                       // will trigger when saved
@@ -325,6 +326,43 @@ class _FormWorkerState extends State<FormWorker> {
                       _notulensi = value;
                     },
                   ),
+                  SizedBox(
+                    height: _gap,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                      Expanded(
+                        child: Container(
+                           child: TextFormField(
+                             decoration: const InputDecoration(
+                               labelText: 'Guest',
+                             ),
+                            ),
+                        )
+                      ),
+                        SizedBox(
+                          width: _gap,
+                        ),
+                        Expanded(
+                            child: Container(
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Theme.of(context).colorScheme.primary)
+                                ),
+                                textColor: Colors.white,
+                                color: Theme.of(context).colorScheme.primary,
+                                onPressed: (){},
+                                child: Text("Check User")
+                              ),
+                            )
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        )
+                    ]
+                  )
                 ],
               ),
             ),
@@ -353,7 +391,9 @@ class _FormWorkerState extends State<FormWorker> {
               else if (_alarm == null) {
                 _showSnackBar('Alarm wajib diisi!');
               }
-
+              else if (DateTime.parse(_waktuMulai).isBefore(DateTime.parse(_waktuSelesai))==false) {
+                _showSnackBar('Waktu mulai harus terlebih dahulu sebelum waktu selesai');
+              }
               else {
 
                 form.save

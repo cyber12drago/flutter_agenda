@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -18,7 +17,6 @@ class ModelProvider {
 
     return _modelProvider;
   }
-
   final String dbName;
   final int dbVersion;
   Database _database;
